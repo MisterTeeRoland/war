@@ -28,18 +28,29 @@
   			</div>
 		</nav>
 
+		<!-- Page Header -->
+
 		<header>
 			<h1>War!</h1>
 			<h3><I>Classic. Deadly.</I></h3>
 		</header>
 
+		<!-- Game board -->
 		<section>
 			<div id="boardwrap">
+
+				<!-- War Animation for when "War" happens -->
+
 				<div id="warAnimation">
 					<p id="warP">WAR!!!</p>
 				</div>
 				
+				<!-- Game board -->
+				
 				<div id="game">
+
+					<!-- Top of board with card counts and flip results -->
+
 					<div id="gameHeader">
 						<table>
 							<tr>
@@ -49,6 +60,8 @@
 							</tr>
 						</table>
 					</div>
+
+					<!-- Bottom of board with player Decks, player cards, and "Deal" / "New Game" buttons -->
 					
 					<table id="gameTable" BORDER="0">
 						<tr>
@@ -61,19 +74,29 @@
 					</table>
 				</div>
 
+				<!-- How to play screen -->
 				<div id="howTo">
 					<table>
 						<tr>
+
+							<!-- Description of the game -->
+
 							<td id="gameDesc">
 								<p>The game is simple. Compare your card against the computer. Highest card wins, and winner takes both cards. Play until one person has all of the cards. Press PLAY to begin!</p>
 							</td>
+
 							<td id="playButton"><button onclick="play()"><strong>PLAY!</strong></button></td>
+
+							<!-- Description of what a "War" is -->
+
 							<td id="warDesc">
 								<p>In the event of a tie, <u>THERE WILL BE WAR.</u> Three cards will be drawn from each deck (if applicable) and the fourth card from each will be compared. Winner takes all cards.</p>
 							</td>
 						</tr>
 					</table>
 				</div>
+
+				<!-- Deck choice screen, table with deck images -->
 
 				<div id="deckChoice">
 					<table id="deckTable" BORDER="1">
@@ -96,9 +119,13 @@
 				</div>
 			</div>
 
+			<!-- Game caption at bottom -->
+
 			<p id='capt'><I>Did you find any <a href="mailto:tyler.roland92@yahoo.com?subject=Found%20A%20Problem%20(War)" style="color: white;">problems</a> with or have any <a href="mailto:tyler.roland92@yahoo.com?subject=I've%20Got%20A%20Suggestion!%20(War)" style="color: white;">suggestions</a> for the game? Please let me know!</I></p>
 		</section>
 
+		<!-- Footer -->
+		
 		<footer>
 			<p>
 				&copy; Copyright Tyler Roland 2015. All rights reserved.
