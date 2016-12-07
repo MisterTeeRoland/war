@@ -1,63 +1,47 @@
 //initialize variables
-var warArray = [];
-var playerHand = [];
-var compHand = [];
+var warArray = [], playerHand = [], compHand = [];
+var playDeck = '', computerDeck = '', playerCard = '', compCard = '';
 
-var playDeck = '';
-var computerDeck = '';
-var Decks = ['bladedancerC.png', 'gunslingerC.png', 'nightstalkerC.png', 'strikerC.png', 'sunbreakerC.png', 'defenderC.png', 'stormcallerC.png', 'sunsingerC.png', 'voidwalkerC.png'];
-
-var playerCard = '';
-var compCard = '';
-
+var playing = false;
 
 //function to fill an array with 52 numbers
-function fillArray()
-{
+function fillArray() {
 	var deck = [];
 	for (var i = 0; i < 52; i++)
-	{
 		deck[i] = i;
-	}
 
 	shuffle(deck);
-
 	splitCards(deck);
 }
 
 //function to shuffle deck of cards. 
-function shuffle(o)
-{
-    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
+function shuffle(deck) {
+    for(var j, x, i = deck.length; i; j = Math.floor(Math.random() * i), x = deck[--i], deck[i] = deck[j], deck[j] = x);
+    return deck;
 }
 
 //function to split shuffled deck in half
-function splitCards(deck)
-{
+function splitCards(deck) {
 	var i = 0;
 
 	//push a card to each "hand" array
-	while (i != deck.length)
-	{
+	while (i != deck.length) {
 		playerHand.push(deck[i]);
 		compHand.push(deck[(i+1)]);
 		i+=2;
 	}
 
-	//updates the card count areas of the game board
-	$('#playCount').append("<p><strong style='font-size: 25px'>Player cards: " + playerHand.length + "</strong></p>");
-	$('#compCount').append("<p><strong style='font-size: 25px'>Computer cards: " + compHand.length + "</strong></p>");
-	$('#result').append('<p><strong style="font-size: 25px"></strong></p>');
+	$('.playCount').html("Player cards: " + playerHand.length);
+	$('.compCount').html("Computer cards: " + compHand.length);
+	$('.result').html("");
 }
 
 //function to take top card off of each deck and put into card slot
-function deal()
-{
+function deal() {
 	//if a card is already in the slot, removes card. ALso shows "New Game" button if hidden
-	$('#playerCard').html("");
-	$('#compCard').html("");
-	$('#newGame').show();
+	$('.playerCard').html("");
+	$('.compCard').html("");
+	$('.newGame').show();
 
 	//sets current card for each hand
 	playerCard = playerHand[0];
@@ -71,8 +55,8 @@ function deal()
 	img2.src = ("img/cards/" + compHand[0] + ".png");
 
 	//adds card image to the card slot of the game board
-	document.getElementById('playerCard').appendChild(img);
-	document.getElementById('compCard').appendChild(img2);
+	$('.playerCard').append(img);
+	$('.compCard').append(img2);
 
 	//calls compare function to compare current cards
 	compare(playerCard, compCard);
@@ -80,14 +64,12 @@ function deal()
 
 
 //function to compare both face up cards (or current cards)
-function compare(player, comp)
-{
+function compare(player, comp) {
 	//if player's card value is higher than the computer's card value
 	//player wins
-	if((player % 13) > (comp % 13))
-	{
+	if((player % 13) > (comp % 13)) {
 		//updates result div of the game board
-		$('#result p').replaceWith('<p><strong style="font-size: 25px">Player wins!</strong></p>');
+		$('.result').html("Player wins!");
 		
 		//pushes current cards from each hand to the back of the player's hand
 		playerHand.push(comp);
@@ -104,10 +86,9 @@ function compare(player, comp)
 
 	//if computer's card value is higher than the player's card value
 	//computer wins
-	else if ((player % 13) < (comp % 13))
-	{
+	else if ((player % 13) < (comp % 13)) {
 		//update the results div of the game table
-		$('#result p').replaceWith('<p><strong style="font-size: 25px">Computer wins!</strong></p>');
+		$('.result').html("Computer wins!");
 		
 		//pushes current cards from each hand to the back of the computer's hand
 		compHand.push(player);
@@ -125,25 +106,19 @@ function compare(player, comp)
 	//if player's current card value is the same as the computer's current card value
 	//a "War" (tie) occurs
 	else if ((player % 13) === (comp % 13))
-	{
 		war();
-	}
-
 }
 
 
 //function to handle "war" instances or "ties"
-function war()
-{
+function war() {
 	//show "war" animation
-	$('#warAnimation').show().children().addClass('war');
+	$('#warAnimation').addClass('war').show();
 
 	//keeps animation going for 1 second, then removes the 'war' class and hides the animation
-	setTimeout(function()
-	{
-		$('#warP').removeClass('war');
-		$('#warAnimation').hide();
-	}, 1000);
+	setTimeout(function() {
+		$('#warAnimation').removeClass('war').hide();
+	}, 2000);
 
 	//calls function to draw cards from each deck
 	warToArray();
@@ -151,18 +126,15 @@ function war()
 
 
 //function to take cards from each deck and put into "war" array
-function warToArray()
-{
+function warToArray() {
+
 	//if not able to draw 4 cards, draw as many as possible
-	if (playerHand.length < 5 || compHand.length < 5)
-	{
+	if (playerHand.length < 5 || compHand.length < 5) {
 
 		//if computer has less than 4 cards
-		if(playerHand.length > compHand.length)
-		{
+		if(playerHand.length > compHand.length) {
 			//take all but last card and push them to the war array
-			for (var i = 0; i < compHand.length-1; i++)
-			{
+			for (var i = 0; i < compHand.length-1; i++) {
 				warArray.push(playerHand[i]);
 				playerHand.shift();
 				warArray.push(compHand[i]);
@@ -174,12 +146,10 @@ function warToArray()
 		}
 
 		//if the player hand has less than 4 cards 
-		else if(playerHand.length < compHand.length)
-		{
+		else if(playerHand.length < compHand.length) {
 
 			//take all but 1 and push them to the war array
-			for (var i = 0; i < playerHand.length-1; i++)
-			{
+			for (var i = 0; i < playerHand.length-1; i++) {
 				warArray.push(playerHand[i]);
 				playerHand.shift();
 				warArray.push(compHand[i]);
@@ -192,12 +162,10 @@ function warToArray()
 	}
 
 	//if both decks have greater than four cards
-	else
-	{
+	else {
 
 		//take three cards from each deck and push them to the war array
-		for (var i = 0; i < 4; i++)
-		{
+		for (var i = 0; i < 4; i++) {
 			warArray.push(playerHand[i]);
 			playerHand.shift();
 			warArray.push(compHand[i]);
@@ -211,13 +179,11 @@ function warToArray()
 
 
 //function to compare current cards and allocate the war array correctly
-function compareWar(player, comp)
-{
+function compareWar(player, comp) {
 	//if player's War card value is greater than the computer's War card value, player wins the tie
-	if((player % 13) > (comp % 13))
-	{
+	if((player % 13) > (comp % 13)) {
 		//updates result section of the game board
-		$('#result p').replaceWith('<p><strong style="font-size: 25px">Player wins!</strong></p>');
+		$('.result').html("Player wins!");
 		
 		//pushes entire war array to the back of the player's hand
 		playerHand.push.apply(playerHand, warArray);
@@ -239,10 +205,9 @@ function compareWar(player, comp)
 	}
 
 	//if computer's War card value is greater than the player's War card value, computer wins the tie
-	else if ((player % 13) < (comp % 13))
-	{
+	else if ((player % 13) < (comp % 13)) {
 		//update result section of the game board
-		$('#result p').replaceWith('<p><strong style="font-size: 25px">Computer wins!</strong></p>');
+		$('#result').html("Computer wins!");
 		
 		//pushes the entire war array to the back of the computer's hand
 		compHand.push.apply(compHand, warArray);
@@ -265,119 +230,85 @@ function compareWar(player, comp)
 
 	//if player's War card value is the same as the computer's War card value, call for another war
 	else if ((player % 13) === (comp % 13))
-	{
 		war();
-	}
 }
 
 
 //function to check if either player is out of cards (being a win for the other player)
-function checkWin()
-{
+function checkWin() {
 	//if player is out of cards, computer wins
-	if (playerHand.length === 0)
-	{
+	if (playerHand.length == 0) {
 		alert("Computer wins. :(");
 
 		//resets the card and deck image to make it seem like the player is out of cards
-		$('#playerCard').html("");
-		$('#playerDeck').html("");
+		$('.playerCard').html("");
+		$('.playerDeck').html("");
 
 		//hides the "deal" button, forces player to only start a new game
-		$('#deal').hide();
+		$('.deal').hide();
 	}
 
 	//if computer is out of cards, player wins
-	else if (compHand.length === 0)
-	{
+	else if (compHand.length == 0) {
 		alert("Player wins!! :D");
 
 		//resets the card and deck image to make it seem like the computer is out of cards.
-		$('#compHand').html("");
-		$('#compDeck').html("");
+		$('.compHand').html("");
+		$('.compDeck').html("");
 
 		//hides the "deal" button, forces the player to only start a new game
-		$('#deal').hide();
+		$('.deal').hide();
 	}
-}
-
-//function to set the player and computer deck. 
-//player deck is chosen by a click, computer deck is chosen randomly and 
-//cannot be the same as the players (only a visual nicety, does not affect gameplay)
-function deckSet(element, pers)
-{
-
-	//creates an image element for the deck image
-	var img = document.createElement('img');
-
-	//if assigning player's deck, show deck image in "PlayerDeck" div
-	if (pers === 'player')
-	{
-		img.src = ("img/backs/" + element);
-		playDeck = element;
-		document.getElementById('playerDeck').appendChild(img);
-	}
-
-	//if assigning computer's deck, show deck image in "compDeck" div
-	else if (pers === 'comp')
-	{
-		img.src = ("img/backs/" + element);
-		document.getElementById('compDeck').appendChild(img);
-	}
-
-	//this is called when player chooses a deck for the first time, but not before player deck is set
-	if (computerDeck === '')
-	{
-		var yes = true;
-
-		//while still looking for an image that is not used by the player
-		while(yes)
-		{
-			var rand = Math.floor(Math.random() * 9);
-
-			//if current image is not the player's deck image, 
-			//call deckSet function as the computer and set to that image
-			if (Decks[rand] != playDeck)
-			{
-				computerDeck = Decks[rand];
-				deckSet(Decks[rand], 'comp');
-				yes = false;
-			}
-		}
-	}
-
-	//hides the deck choice screen and shows the "how to play" screen
-	$('#deckChoice').hide();
-	$('#howTo').show();
 }
 
 //function that hides the "how to play" screen and shows the game board
-function play()
-{
-	$('#howTo').hide();
-	$('#game').show();
+function play() {
+	hideAll();
+	$('.game').show();
+	playing = true;
+	sizeElements();
 }
 
 
 //function to update the card count after every "deal" finishes
-function updateCount()
-{
-	$('#playCount p').replaceWith('<p><strong style="font-size: 25px">Player cards: ' + playerHand.length + "</strong></p>");
-	$('#compCount p').replaceWith('<p><strong style="font-size: 25px">Computer cards: ' + compHand.length + "</strong></p>");
+function updateCount() {
+	$('.playCount').html("Player cards: " + playerHand.length);
+	$('.compCount').html("Computer cards: " + compHand.length);
 }
 
 
+function hideAll() {
+	$("header").hide();
+	$(".game").hide();
+	$("#howToPlay").hide();
+	$(".newGame").hide();
+	$("#desktop").hide();
+	$("#mobile").hide();
+}
 
-//function that automatically gets the game ready when the page is loaded
-window.onload = function()
-{
-	//hides everything but the "deck choice" screen
-	$('#game').hide();
-	$('#howTo').hide();
-	$('#warAnimation').hide();
-	$('#deckChoice').show();
-	$('#newGame').hide();
-
-	//calls function to fill card array, shuffle, and split cards
+window.onload = function() {
+	hideAll();
+	$("header").show();
+	$("#howToPlay").show();
 	fillArray();
 };
+
+window.onresize = function() {
+	sizeElements();
+};
+
+function sizeElements() {
+	var width = window.innerWidth;
+
+	if (playing) {
+		//mobile screens!
+		if (width < 800) {
+			$("#desktop").hide();
+			$("#mobile").show();
+		}
+		else {
+			$("#mobile").hide();
+			$("#desktop").show();
+		}
+	}
+}
