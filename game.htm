@@ -1,135 +1,97 @@
 <!DOCTYPE html>
-<html>
-
+<html>	
 	<head>
 		<meta charset="UTF-8" />
 		<title>Tyler Roland | War</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		<link rel="stylesheet" type="text/css" href="game.css">
-		<script type="text/javascript" src="game.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<style>
+		<!--
+			@font-face {font-family: Komtit; src: url(KOMTIT.ttf);}
+
+			body {background-color: #30415D; text-align: center; margin: 0; font-family: Helvetica, sans-serif; color: #fff;}
+			header {color: white; padding: 20px 0 40px 0; background-color: #CF6766;}
+			button {color: #222; width: 162px; height: 70px; border: 2px solid #222; font-size: 30px; font-family: Komtit; cursor: pointer; margin: 10px auto; box-shadow: 3px 3px 3px #222;}
+			button:hover {background-color: #ccc;}
+			h1 {font-size: 100px; font-family: Komtit; padding: 0; margin: 0 0 20px 0; font-weight: bolder;}
+			h2 {font-size: 40px; }
+			h3 {font-size: 50px; font-family: Komtit; padding: 0; margin: 0;}
+			img {width: 100%; border-radius: 10px; box-shadow: 3px 3px 3px #222;}
+
+			#boardwrap {width: 90%; margin: auto; padding: 30px 0;}
+
+			#howTo div {margin: 40px; width: 80%; max-width: 500px; font-size: 30px; display: inline-block; vertical-align: top;}
+			
+			#warAnimation {left: 30%; top: 30%; font-family: Komtit; display: none; position: absolute; overflow: hidden;}
+			.war {animation: war 2s infinite;}
+			@keyframes war {0% {color: white; font-size: 10px;} 25% {color: #CF6766;} 50% {color: white;} 75% {color: #CF6766;} 100% {color: white; font-size: 200px; transform: rotate(720deg);}}
+
+			#mobile {display: none;}
+			#mobile div {display: inline-block; vertical-align: middle; width: 45%; margin: 10px auto;}
+
+
+			.gameHeader {padding: 20px 0;}
+			.gameHeader div {display: inline-block; vertical-align: middle;}
+			.playCount, .compCount {width: 25%; margin: auto; font-size: 25px; font-weight: bolder;}
+			.result {width: 40%; margin: auto; font-size: 25px; font-weight: bolder;}
+		
+			.gameTable div {max-width: 45%; width: 250px; display: inline-block; vertical-align: middle;}
+		-->
+		</style>
+		<script src="../js/jquery3.1.1.min.js"></script>
+		<script src="game.js"></script>
 	</head>
 
 	<body>
-
-		<!-- Navigation bar -->
-
-		<nav class="navbar navbar-inverse navbar-fixed-top">
-  			<div class="container-fluid">
-    			<div class="navbar-header">
-      				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				        <span class="sr-only">Toggle navigation</span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-      				</button>
-      				<a class="navbar-brand" href="http://tylerroland.x10host.com/index.htm">Tyler Roland</a>
-   				</div>
-  			</div>
-		</nav>
-
-		<!-- Page Header -->
-
 		<header>
-			<h1>War!</h1>
-			<h3><I>Classic. Deadly.</I></h3>
+			<h1>WAR!</h1>
+			<h3>Classic. Deadly.</h3>
 		</header>
 
-		<!-- Game board -->
-		<section>
-			<div id="boardwrap">
+		<div id="boardwrap">
 
-				<!-- War Animation for when "War" happens -->
+			<div id='howToPlay'>
+				<h2><u>How To Play</u></h2>
 
-				<div id="warAnimation">
-					<p id="warP">WAR!!!</p>
-				</div>
-				
-				<!-- Game board -->
-				
-				<div id="game">
-
-					<!-- Top of board with card counts and flip results -->
-
-					<div id="gameHeader">
-						<table>
-							<tr>
-								<td id="playCount"></td>
-								<td id="result"></td>
-								<td id="compCount"></td>
-							</tr>
-						</table>
-					</div>
-
-					<!-- Bottom of board with player Decks, player cards, and "Deal" / "New Game" buttons -->
-					
-					<table id="gameTable" BORDER="0">
-						<tr>
-							<td id="playerDeck"></td>
-							<td id="playerCard"></td>
-							<td id="middleGround"><button id="deal" onclick="deal()"><strong>DEAL</strong></button><br><button id="newGame" onclick="location.href = 'game.htm'"><strong>NEW GAME</strong></button></td>
-							<td id="compCard"></td>
-							<td id="compDeck"></td>
-						</tr>
-					</table>
-				</div>
-
-				<!-- How to play screen -->
 				<div id="howTo">
-					<table>
-						<tr>
-
-							<!-- Description of the game -->
-
-							<td id="gameDesc">
-								<p>The game is simple. Compare your card against the computer. Highest card wins, and winner takes both cards. Play until one person has all of the cards. Press PLAY to begin!</p>
-							</td>
-
-							<td id="playButton"><button onclick="play()"><strong>PLAY!</strong></button></td>
-
-							<!-- Description of what a "War" is -->
-
-							<td id="warDesc">
-								<p>In the event of a tie, <u>THERE WILL BE WAR.</u> Three cards will be drawn from each deck (if applicable) and the fourth card from each will be compared. Winner takes all cards.</p>
-							</td>
-						</tr>
-					</table>
+					<div>The game is simple. Compare your card against the computer. Highest card wins, and winner takes both cards. Play until one person has all of the cards.</div>
+					<div>In the event of a tie, <u>THERE WILL BE WAR.</u> Three cards will be drawn from each deck (if applicable) and the fourth card from each will be compared. Winner takes all cards.</div>
 				</div>
 
-				<!-- Deck choice screen, table with deck images -->
+				<div><button onclick="play()">PLAY!</button></div>
+			</div>
 
-				<div id="deckChoice">
-					<table id="deckTable" BORDER="1">
-
-						<tr height="200px">
-							<td><strong>PICK A DECK!</strong></td>
-							<td id="bladeDancer" colwidth="245px"><img src="img/backs/bladedancerC.png" onclick="deckSet('bladedancerC.png', 'player')"></td>
-							<td colwidth="245px"><img src="img/backs/gunslingerC.png" onclick="deckSet('gunslingerC.png', 'player')"></td>
-							<td colwidth="245px"><img src="img/backs/nightstalkerC.png" onclick="deckSet('nightstalkerC.png', 'player')"></td>
-							<td colwidth="245px"><img src="img/backs/strikerC.png" onclick="deckSet('strikerC.png', 'player')"></td>
-						</tr>
-						<tr height="200px">
-							<td width="188px"><img src="img/backs/sunbreakerC.png" onclick="deckSet('sunbreakerC.png', 'player')"></td>
-							<td width="188px"><img src="img/backs/defenderC.png" onclick="deckSet('defenderC.png', 'player')"></td>
-							<td width="188px"><img src="img/backs/stormcallerC.png" onclick="deckSet('stormcallerC.png', 'player')"></td>
-							<td width="188px"><img src="img/backs/sunsingerC.png" onclick="deckSet('sunsingerC.png', 'player')"></td>
-							<td width="188px"><img src="img/backs/voidwalkerC.png" onclick="deckSet('voidwalkerC.png', 'player')"></td>
-						</tr>
-					</table>
+			<div id="warAnimation">WAR!!!</div>
+			
+			<div id='desktop' class="game">
+				<div class="gameHeader">
+					<div class="playCount"></div>
+					<div class="result"></div>
+					<div class="compCount"></div>
+				</div>
+				
+				<div class="gameTable">
+					<div class="playerDeck"><img src="cardback.jpg"></div>
+					<div class="playerCard"></div>
+					<div class="middleGround"><button class="deal" onclick="deal()">DEAL</button><br><button class="newGame" onclick="location.reload()">NEW GAME</button></div>
+					<div class="compCard"></div>
+					<div class="compDeck"><img src="cardback.jpg"></div>
 				</div>
 			</div>
 
-			<!-- Game caption at bottom -->
+			<div id='mobile' class="game">
+				<div class="playCount"></div><br>
+				<div class="playerDeck"><img src="cardback.jpg"></div>
+				<div class="playerCard"></div>
 
-			<p id='capt'><I>Did you find any <a href="mailto:tyler.roland92@yahoo.com?subject=Found%20A%20Problem%20(War)" style="color: white;">problems</a> with or have any <a href="mailto:tyler.roland92@yahoo.com?subject=I've%20Got%20A%20Suggestion!%20(War)" style="color: white;">suggestions</a> for the game? Please let me know!</I></p>
-		</section>
+				<div class="result"></div><br>
+				<div class="middleGround"><button class="deal" onclick="deal()">DEAL</button><br><button class="newGame" onclick="location.reload()">NEW GAME</button></div><br>
+				
+				<div class="compCount"></div><br>
+				<div class="compDeck"><img src="cardback.jpg"></div>
+				<div class="compCard"></div>
+			</div>
 
-		<!-- Footer -->
-		
-		<footer>
-			<p>
-				&copy; Copyright Tyler Roland 2015. All rights reserved.
-			</p>
-		</footer>	
+			
+
+		</div>
 	</body>
 </html>
