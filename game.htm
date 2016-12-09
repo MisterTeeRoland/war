@@ -2,6 +2,7 @@
 <html>	
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Tyler Roland | War</title>
 		<style>
 		<!--
@@ -18,19 +19,26 @@
 
 			#boardwrap {width: 90%; margin: auto; padding: 30px 0;}
 
-			#howTo div {margin: 40px; width: 80%; max-width: 500px; font-size: 30px; display: inline-block; vertical-align: top;}
+			#howTo div {margin: 40px; width: 80%; max-width: 500px; font-size: 30px; display: inline-block; vertical-align: top; text-align: justify;}
 			
-			#warAnimation {left: 30%; top: 30%; font-family: Komtit; display: none; position: absolute; overflow: hidden;}
+			#warAnimation {left: 40%; top: 20%; font-family: Komtit; display: none; position: absolute; overflow: hidden;}
 			.war {animation: war 2s infinite;}
 			@keyframes war {0% {color: white; font-size: 10px;} 25% {color: #CF6766;} 50% {color: white;} 75% {color: #CF6766;} 100% {color: white; font-size: 200px; transform: rotate(720deg);}}
 
-			#mobile {display: none;}
-			#mobile div {display: inline-block; vertical-align: middle; width: 45%; margin: 10px auto;}
+			@media screen and (max-width: 800px) {
+				#warAnimation {left: 20%; top: 30%; font-family: Komtit; display: none; position: absolute; overflow: hidden;}
+				@keyframes war {0% {color: white; font-size: 10px;} 25% {color: #CF6766;} 50% {color: white;} 75% {color: #CF6766;} 100% {color: white; font-size: 100px; transform: rotate(720deg);}}
+			}
 
+			#mobile {display: none;}
+			#mobile div {display: inline-block; vertical-align: middle; width: 30%; margin: 10px 12px;}
+			#mobile div.playCount, #mobile div.compCount, #mobile div.result {width: 70%;}
+			#mobile .deal, #mobile .newGame {width: 100px; height: 50px; font-size: 18px;}
+			#mobile div.result {font-size: 15px; margin: 5px;}
 
 			.gameHeader {padding: 20px 0;}
 			.gameHeader div {display: inline-block; vertical-align: middle;}
-			.playCount, .compCount {width: 25%; margin: auto; font-size: 25px; font-weight: bolder;}
+			.playCount, .compCount {width: 25%; margin: auto; font-size: 20px; font-weight: bolder;}
 			.result {width: 40%; margin: auto; font-size: 25px; font-weight: bolder;}
 		
 			.gameTable div {max-width: 45%; width: 250px; display: inline-block; vertical-align: middle;}
@@ -89,8 +97,6 @@
 				<div class="compDeck"><img src="cardback.jpg"></div>
 				<div class="compCard"></div>
 			</div>
-
-			
 
 		</div>
 	</body>
