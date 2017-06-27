@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>	
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" contingent="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Tyler Roland | War</title>
+		
+		<script src='../js/jquery3.1.1.min.js'></script>
+		<script src="../css/bootstrap/js/bootstrap.min.js"></script>
+		<script src='game.js'></script>
+
+		<link rel="stylesheet" href="../css/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="game.css">
+
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- [if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class='jumbotron' id='jumbotron'>
+			<h1>WAR!</h1>
+			<h3>Classic. Deadly.</h3>
+		</div><!-- end jumbotron div -->
+
+		<div id="boardwrap">
+
+			<div id='howToPlay'>
+				<h2><u>How To Play</u></h2>
+
+				<div id="howTo">
+					<div>The game is simple. Compare your card against the computer. Highest card wins, and winner takes both cards. Play until one person has all of the cards.</div>
+					<div>In the event of a tie, <u>THERE WILL BE WAR.</u> Three cards will be drawn from each deck (if available) and the fourth card from each will be compared. Winner takes all cards.</div>
+				</div>
+
+				<div><button id='playButton' onclick="play()">PLAY!</button></div>
+			</div><!-- End howToPlay div -->
+
+			<div id="warAnimation">WAR!!!</div>
+			
+			<div id='desktop' class="game">
+				<div class="gameHeader">
+					<div class="playCount"></div>
+					<div class="result"></div>
+					<div class="compCount"></div>
+				</div><!--End gameHeader div -->
+				
+				<div class="gameTable">
+					<div class="playerDeck"><img src="img/cardback.jpg"></div>
+					<div class="playerCard"></div>
+					<div class="middleGround"><button class="deal" onclick="deal()">DEAL</button><br><button class="newGame" onclick="location.reload()">NEW GAME</button></div>
+					<div class="compCard"></div>
+					<div class="compDeck"><img src="img/cardback.jpg"></div>
+				</div><!-- End gameTable div -->
+			</div><!-- End desktop div -->
+
+			<div id='mobile' class="game">
+				<div class="playCount"></div><br>
+				<div class="playerDeck"><img src="img/cardback.jpg"></div>
+				<div class="playerCard"></div>
+
+				<div class="result"></div><br>
+				<div class="middleGround"><button class="deal" onclick="deal()">DEAL</button><br><button class="newGame" onclick="location.reload()">NEW GAME</button></div><br>
+				
+				<div class="compCount"></div><br>
+				<div class="compDeck"><img src="img/cardback.jpg"></div>
+				<div class="compCard"></div>
+			</div><!-- End mobile div -->
+
+		</div><!-- End boardwrap div -->
+
+		<div class='footer'>
+			<div class='text-muted'>&copy; <span id='year'></span> by Tyler J. Roland, LLC. All rights reserved.</div>
+		</div>
+	</body>
+</html>

@@ -1,3 +1,10 @@
+/*
+	game.js
+	Tyler Roland
+	Modified 6/25/17
+	War functionality
+*/
+
 //initialize variables
 var warArray = [], playerHand = [], compHand = [];
 var playDeck = '', computerDeck = '', playerCard = '', compCard = '';
@@ -38,7 +45,8 @@ function splitCards(deck) {
 
 //function to take top card off of each deck and put into card slot
 function deal() {
-	//if a card is already in the slot, removes card. ALso shows "New Game" button if hidden
+	
+	//if a card is already in the slot, removes card. Also shows "New Game" button if hidden
 	$('.playerCard').html("");
 	$('.compCard').html("");
 	$('.newGame').show();
@@ -65,9 +73,10 @@ function deal() {
 
 //function to compare both face up cards (or current cards)
 function compare(player, comp) {
-	//if player's card value is higher than the computer's card value
-	//player wins
+	
+	//if player's card value is higher than the computer's card value, player wins
 	if((player % 13) > (comp % 13)) {
+	
 		//updates result div of the game board
 		$('.result').html("Player wins!");
 		
@@ -84,9 +93,9 @@ function compare(player, comp) {
 		checkWin();
 	}
 
-	//if computer's card value is higher than the player's card value
-	//computer wins
+	//if computer's card value is higher than the player's card value, computer wins
 	else if ((player % 13) < (comp % 13)) {
+		
 		//update the results div of the game table
 		$('.result').html("Computer wins!");
 		
@@ -112,6 +121,7 @@ function compare(player, comp) {
 
 //function to handle "war" instances or "ties"
 function war() {
+	
 	//show "war" animation
 	$('#warAnimation').addClass('war').show();
 
@@ -180,8 +190,10 @@ function warToArray() {
 
 //function to compare current cards and allocate the war array correctly
 function compareWar(player, comp) {
+	
 	//if player's War card value is greater than the computer's War card value, player wins the tie
 	if((player % 13) > (comp % 13)) {
+	
 		//updates result section of the game board
 		$('.result').html("Player wins!");
 		
@@ -206,6 +218,7 @@ function compareWar(player, comp) {
 
 	//if computer's War card value is greater than the player's War card value, computer wins the tie
 	else if ((player % 13) < (comp % 13)) {
+		
 		//update result section of the game board
 		$('#result').html("Computer wins!");
 		
@@ -236,6 +249,7 @@ function compareWar(player, comp) {
 
 //function to check if either player is out of cards (being a win for the other player)
 function checkWin() {
+	
 	//if player is out of cards, computer wins
 	if (playerHand.length == 0) {
 		alert("Computer wins. :(");
@@ -250,6 +264,7 @@ function checkWin() {
 
 	//if computer is out of cards, player wins
 	else if (compHand.length == 0) {
+		
 		alert("Player wins!! :D");
 
 		//resets the card and deck image to make it seem like the computer is out of cards.
@@ -264,9 +279,8 @@ function checkWin() {
 //function that hides the "how to play" screen and shows the game board
 function play() {
 	hideAll();
-	$('.game').show();
+	$('#desktop').show();
 	playing = true;
-	sizeElements();
 }
 
 
@@ -278,37 +292,17 @@ function updateCount() {
 
 
 function hideAll() {
-	$("header").hide();
-	$(".game").hide();
+	$("#jumbotron").hide();
+	$("#desktop").hide();
 	$("#howToPlay").hide();
 	$(".newGame").hide();
-	$("#desktop").hide();
-	$("#mobile").hide();
 }
 
 window.onload = function() {
 	hideAll();
-	$("header").show();
+	$("#jumbotron").show();
 	$("#howToPlay").show();
 	fillArray();
+
+	$("#year").html(new Date().getFullYear());
 };
-
-window.onresize = function() {
-	sizeElements();
-};
-
-function sizeElements() {
-	var width = window.innerWidth;
-
-	if (playing) {
-		//mobile screens!
-		if (width < 800) {
-			$("#desktop").hide();
-			$("#mobile").show();
-		}
-		else {
-			$("#mobile").hide();
-			$("#desktop").show();
-		}
-	}
-}

@@ -1,0 +1,244 @@
+/*
+	game.css
+	Tyler Roland
+	Modified 6/25/17
+	War style sheet
+*/
+
+
+
+/* -- Imported fonts -- */
+
+@font-face {
+	font-family: Komtit; 
+	src: url(fonts/KOMTIT.ttf);
+}
+
+
+
+/* -- General styles -- */
+
+body {
+	background-color: #30415D; 
+	color: #fff;
+	font-family: Helvetica, sans-serif; 
+	margin: 0;
+	text-align: center;
+}
+
+#jumbotron {
+	background-color: #CF6766;
+	color: white; 
+	padding: 20px 0 40px; 
+}
+
+button {
+	border: 0;
+	box-shadow: 3px 3px 3px #222;
+	color: #222; 
+	cursor: pointer;
+	font-family: Komtit;
+	font-size: 25px; 
+	margin: 10px auto;
+	padding: 10px 0;
+	width: 162px; 
+}
+
+button:hover {
+	background-color: #ccc;
+}
+
+h1 {
+	font-size: 100px; 
+	font-family: Komtit; 
+	font-weight: bolder;
+	margin: 0 0 20px 0;
+	padding: 0;
+}
+
+h2 {
+	font-size: 40px;
+}
+
+h3 {
+	font-size: 50px; 
+	font-family: Komtit; 
+	margin: 0;
+	padding: 0; 
+}
+
+img {
+	border-radius: 10px; 
+	box-shadow: 3px 3px 3px #222;
+	width: 100%;
+}
+
+#boardwrap {
+	margin: auto; 
+	padding: 30px 0;
+	width: 90%;
+}
+
+#howTo div {
+	display: inline-block;
+	font-size: 20px;
+	margin: 40px 20px 0; 
+	max-width: 500px; 
+	text-align: justify; 
+	vertical-align: top; 
+	width: 80%; 
+}
+
+#playButton {
+	margin-top: 20px;
+}
+
+
+
+/* -- War animation -- */
+
+#warAnimation {
+	display: none;
+	font-family: Komtit;
+	left: 40%;    
+	overflow: hidden;
+	position: absolute; 
+	top: 20%;
+}
+.war {
+	animation: war 2s infinite;
+}
+
+@keyframes war {
+	0% {
+		color: white; 
+		font-size: 10px;
+	} 
+	25% {
+		color: #CF6766;
+	} 
+	50% {
+		color: white;
+	} 
+	75% {
+		color: #CF6766;
+	} 
+	100% {
+		color: white; 
+		font-size: 200px; 
+		transform: rotate(720deg);
+	}
+}
+
+/* -- Mobile responsive -- */
+
+#mobile {
+	display: none;
+}
+
+#mobile div {
+	display: inline-block; 
+	margin: 10px 12px;
+	vertical-align: middle; 
+	width: 30%; 
+}
+
+#mobile div.playCount, #mobile div.compCount, #mobile div.result {
+	width: 70%;
+}
+
+#mobile .deal, #mobile .newGame { 
+	font-size: 18px;
+	height: 50px;
+	width: 100px;
+}
+
+#mobile div.result {
+	font-size: 15px; 
+	margin: 5px;
+}
+
+.gameHeader {
+	padding: 20px 0;
+}
+
+.gameHeader div {
+	display: inline-block; 
+	vertical-align: middle;
+}
+
+.playCount, .compCount { 
+	font-size: 20px; 
+	font-weight: bolder;
+	margin: auto;
+	width: 20%;
+}
+
+.result {
+	font-size: 25px; 
+	font-weight: bolder;
+	margin: auto; 
+	width: 40%;
+}
+
+.gameTable div {
+	display: inline-block; 
+	max-width: 35%; 
+	margin: 0 20px;
+	vertical-align: middle;
+	width: 200px;
+}
+
+
+.footer {
+	background-color: #ccc;
+	bottom: 0;
+	padding: 10px 0;
+	position: absolute;
+	width: 100%;
+}
+
+
+
+/* -- Responsiveness -- */
+
+@media screen and (max-width: 800px) {
+
+	#desktop {
+		display: none;
+	}
+	#mobile {
+		display: block;
+	}
+	
+
+	#warAnimation {
+		display: none;
+		font-family: Komtit;
+		left: 20%;    
+		overflow: hidden;
+		position: absolute; 
+		top: 30%;
+	}
+	
+	@keyframes war {
+		0% {
+			color: white; 
+			font-size: 10px;
+		} 
+		25% {
+			color: #CF6766;
+		} 
+		50% {
+			color: white;
+		} 
+		75% {
+			color: #CF6766;
+		} 
+		100% {
+			color: white; 
+			font-size: 100px; 
+			transform: rotate(720deg);
+		}
+	}
+}
