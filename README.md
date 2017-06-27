@@ -1,4 +1,5 @@
 # War
+
 *Simple war card game using JavaScript*
 
 A deck of cards is split between the player and the computer, face down.
@@ -11,5 +12,8 @@ Up to four cards are drawn from each deck, and the fourth card is compared as no
 The player with the highest card then wins all of the "war" cards.
 
 The game ends when one player holds all of the cards.
+
+*I chose not to upload the card images used in the code because I did not own the images.
+To replicate, 0.png = 2 of Clubs, 13.png = 2 of Diamonds, 26.png = 2 of Hearts, and 39.png = 2 of Spades.*
 
 Can be played at http://tyler-roland.com/War
