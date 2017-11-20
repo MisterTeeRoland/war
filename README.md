@@ -1,6 +1,6 @@
 # War
 
-*Simple war card game using JavaScript*
+*Simple war card game using JavaScript, jQuery, and some CSS animations*
 
 ### Setup:
 
